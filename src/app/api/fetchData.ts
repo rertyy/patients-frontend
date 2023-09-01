@@ -1,7 +1,9 @@
 import { PatientData, PatientRecord } from "@/app/models/models";
 import { patientList } from "@/app/api/data";
 
-const BASE_URL = "http://127.0.0.1:5000";
+const LOCALHOST = "http://127.0.0.1:5000";
+const RENDER = "https://patients-api-gik9.onrender.com";
+const BASE_URL = RENDER;
 
 /* actual API call is this*/
 export const getPatientsList = async (): Promise<PatientData[]> => {
