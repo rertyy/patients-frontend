@@ -1,6 +1,5 @@
 "use client";
 
-import PatientLineGraph from "@/app/patients/PatientLineGraph";
 import { getPatientsList } from "@/app/api/fetchData";
 import { useEffect, useState } from "react";
 import { PatientData } from "@/app/models/models";
@@ -18,14 +17,12 @@ const Patients = () => {
   useEffect(() => {
     getPatientsList()
       .then((data) => {
-        console.log("data is ", data[0]);
         setPatientList(data);
-        setSelectedPatient(data[0]); // TODO change this
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [patientList.length, selectedPatient?.notes]);
 
   const selectPatientById = (id: number) => {
     const patient = patientList.find((patient) => patient.id === id);
@@ -37,7 +34,10 @@ const Patients = () => {
   return (
     <div className="flex flex-auto gap-2 m-5">
       <div className={"basis-1/5"}>
-        <div className={"font-extrabold mb-1"}> Patients </div>
+        <div className={"font-extrabold mb-1"}>
+          {" "}
+          Patients ({patientList.length}){" "}
+        </div>
         <div className={"border-black border-2 rounded"}>
           <PatientNameList
             patientDataList={patientList}
@@ -57,7 +57,7 @@ const Patients = () => {
           )}
         </div>
       </div>
-      <div className={"basis-1/5"}>
+      <div className={"basis-1/5 sticky"}>
         <div className={"font-extrabold mb-1"}> Notes </div>
         <div className={"basis-1/5  border-black border-2 rounded3"}>
           {selectedPatient ? (

@@ -16,13 +16,15 @@ const PatientDetails = ({
         <div>
           <div className={"font-bold mb-1"}> Basic Information </div>
           <div className={"flex gap-2 mb-3"}>
-            <div className={"basis-auto ml-3"}>
-              <div className={"font-bold"}> Name: </div>
-              <div className={"font-bold"}> Age: </div>
+            <div className={"basis-auto ml-3 font-bold"}>
+              <div> Name: </div>
+              <div> Age: </div>
+              <div> Disease: </div>
             </div>
             <div className={"basis-auto"}>
               <div>{name}</div>
               <div>{age}</div>
+              <div>{disease}</div>
             </div>
           </div>
         </div>
@@ -37,10 +39,8 @@ const PatientDetails = ({
       <div>
         <div className={"font-bold"}>Description: </div>
         <div className={"ml-3 mb-5 mt-1 mr-5"}>{description}</div>
-        <div className={"font-bold"}>
-          Medical History
-          <PatientTable records={records} />
-        </div>
+        <div className={"font-bold"}> Medical History </div>
+        <PatientTable records={records} />
         <PatientLineGraph
           id={id}
           name={name}

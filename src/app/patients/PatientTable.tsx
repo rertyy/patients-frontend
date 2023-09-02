@@ -1,8 +1,8 @@
-import { PatientData, PatientRecord } from "@/app/models/models";
+import { PatientRecord } from "@/app/models/models";
 
 const PatientTable = ({ records }: { records: PatientRecord[] }) => {
   return (
-    <table className={"ml-3 w-1/3"}>
+    <table className={"ml-3 w-1/2 max-w-full"}>
       <tbody className={"pl-3 pr-10 border-dotted border-2 border-black"}>
         <tr className="text-left">
           <th>Date</th>

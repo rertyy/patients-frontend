@@ -1,5 +1,4 @@
 import { PatientData, PatientRecord } from "@/app/models/models";
-import { patientList } from "@/app/api/data";
 
 const LOCALHOST = "http://127.0.0.1:5000";
 const RENDER = "https://patients-api-gik9.onrender.com";
@@ -7,7 +6,12 @@ const BASE_URL = RENDER;
 
 /* actual API call is this*/
 export const getPatientsList = async (): Promise<PatientData[]> => {
-  const res = await fetch(`${BASE_URL}/patients`);
+  const res = await fetch(`${BASE_URL}/patients`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -28,12 +32,17 @@ export const savePatientNotes = async (
   patientId: number,
   patientNotes: string,
 ): Promise<unknown> => {
+  console.log("id", patientId);
+  console.log("notes:", patientNotes);
   const res = await fetch(`${BASE_URL}/patients/${patientId}/notes`, {
     method: "POST",
-    body: JSON.stringify({ patientId, patientNotes }),
+    body: JSON.stringify({ patientNotes }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   if (!res.ok) {
-    throw new Error("Failed to post data");
+    throw new Error(`Error: ${res.statusText.toString()}`);
   }
   return res.json();
 };

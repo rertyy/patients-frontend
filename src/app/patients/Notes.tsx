@@ -27,21 +27,25 @@ interface NotesProps {
 }
 
 const Notes = ({ id, notes }: NotesProps) => {
+  console.log("Notes:", notes);
   const [notesText, setNotesText] = useState(notes);
   const [saved, setSaved] = useState(false);
   const [savedTime, setSavedTime] = useState(new Date());
-  const [errorSaving, setErrorSaving] = useState(false);
+  // const [errorSaving, setErrorSaving] = useState(false);
 
   useEffect(() => {
     setNotesText(notes);
-  }, [id]);
+  }, [id, notes]);
 
   return (
     <div className={""}>
       <textarea
-        content={notesText}
+        value={notesText}
+        // content={notesText}
         data-placeholder={"Insert your notes here"}
         onChange={(e) => {
+          e.target.style.height = "auto";
+          e.target.style.height = `${Math.min(e.target.scrollHeight, 400)}px`;
           setNotesText(e.target.value);
           setSaved(false);
           !saved &&
@@ -51,11 +55,11 @@ const Notes = ({ id, notes }: NotesProps) => {
             );
         }}
         placeholder={"Insert your notes here"}
-        className={"border-4 p-3 m-2 overflow-y-auto h-full w-10/12"}
-      />
+        className={"border-4 p-3 m-2 max-h-full w-10/12"}
+      ></textarea>
       <div
         className={`mt-0.5 ml-2 text-xs ${
-          saved ? "text-gray-600" : "text-red-600"
+          saved ? "text-gray-600" : "invisible"
         }`}
       >
         {saved ? `Last Saved: ${timeToString(savedTime)}` : "Not saved"}
