@@ -1,7 +1,7 @@
 export default function User() {
   return (
     <div>
-      <p>Login Screen</p>;
+      <p>Page under construction</p>;
     </div>
   );
 }
